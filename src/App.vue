@@ -1,5 +1,13 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
+  <img src="./assets/logo.png">
+  <div>
+    <p>
+      If Element Plus is successfully added to this project, you'll see an
+      <code v-text="'<el-button>'"></code>
+      below
+    </p>
+    <el-button type="primary">el-button</el-button>
+  </div>
   <HelloWorld msg="Welcome to Your Vue.js App"/>
 </template>
 
@@ -10,11 +18,7 @@ export default {
   name: 'App',
   components: {
     HelloWorld
-  },
-  mounted() {
-    console.log("App version: %s", process.env.VUE_APP_VERSION);
-    console.log("App ENV: %s", process.env.VUE_APP_ENV);
-  },
+  }
 }
 </script>
 
