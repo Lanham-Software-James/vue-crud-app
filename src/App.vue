@@ -10,7 +10,11 @@ export default {
   name: 'App',
   components: {
     HelloWorld
-  }
+  },
+  mounted() {
+    console.log("App version: %s", process.env.VUE_APP_VERSION);
+    console.log("App ENV: %s", process.env.VUE_APP_ENV);
+  },
 }
 </script>
 
