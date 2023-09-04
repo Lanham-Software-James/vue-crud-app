@@ -70,6 +70,8 @@
 import db from "./firebaseInit.js";
 import { collection, addDoc, query, onSnapshot } from "firebase/firestore";
 
+const employees = collection(db, 'employees');
+
 export default {
   name: 'App',
   data() {
@@ -80,7 +82,7 @@ export default {
     }
   },
   mounted() {
-    const q = query(collection(db, 'employees'));
+    const q = query(employees);
     this.unsubscribe = onSnapshot(q, (querySnapshot) => {
       this.employeesData = []
       querySnapshot.forEach((doc) => {
@@ -98,8 +100,6 @@ export default {
   },
   methods: {
     createEmployee(name) {
-
-      const employees = collection(db, 'employees');
       
       addDoc(employees, {date: new Date(), name: name })
       .then(() => {
