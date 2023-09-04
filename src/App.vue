@@ -120,9 +120,6 @@ export default {
     createEmployee(name) {
       this.add_employee_visible = false;
       addDoc(employees, {date: new Date(), name: name })
-      .then(() => {
-        console.log("Document successfully written!");
-      })
       .catch((error) => {
         console.error("Error writing document: %s", error);
       });
@@ -131,13 +128,19 @@ export default {
     editEmployee(id, name) {
       const docRef = doc(db, 'employees', id);
 
-      updateDoc(docRef, {name: name});
+      updateDoc(docRef, {name: name})
+      .catch((error) => {
+        console.error("Error writing document: %s", error);
+      });
     },
 
     deleteEmployee(id) {
       const docRef = doc(db, 'employees', id);
 
-      deleteDoc(docRef);
+      deleteDoc(docRef)
+      .catch((error) => {
+        console.error("Error deleting document: %s", error);
+      });
     },
 
     prepEdit(name) {
