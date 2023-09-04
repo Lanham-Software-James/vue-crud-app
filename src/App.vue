@@ -4,10 +4,10 @@
       placement="bottom"
       title="New Employee"
       width="200"
-      :visible="add_employee_visible" 
+      trigger="click"
     >
     <template #reference>
-      <el-button round  type="success" @click="add_employee_visible = true"
+      <el-button round  type="success"
         >Add New Employee</el-button
       >
     </template>
@@ -84,7 +84,6 @@
 
 import db from "./firebaseInit.js";
 import { collection, addDoc, query, onSnapshot, doc, updateDoc, deleteDoc } from "firebase/firestore";
-import { ref } from 'vue'
 
 const employees = collection(db, 'employees');
 
@@ -95,8 +94,7 @@ export default {
       add_name: '',
       edit_name: '',
       employeesData: [],
-      unsubscribe: '',
-      add_employee_visible: ref(false)
+      unsubscribe: ''
     }
   },
   mounted() {
@@ -119,10 +117,13 @@ export default {
   methods: {
     createEmployee(name) {
       this.add_employee_visible = false;
+      
       addDoc(employees, {date: new Date(), name: name })
       .catch((error) => {
         console.error("Error writing document: %s", error);
       });
+      
+      this.add_name = '';
     },
 
     editEmployee(id, name) {
