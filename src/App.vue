@@ -14,10 +14,10 @@
     </template>
       <el-input
         placeholder="John Doe"
-        v-model="name"
+        v-model="add_name"
       ></el-input>
 
-      <el-button round  type="success" @click="createEmployee(name)"
+      <el-button round  type="success" @click="createEmployee(add_name)"
         >Add Employee</el-button
       >
     </el-popover>
@@ -36,39 +36,52 @@
     >
       <el-table-column label="Date" prop="date"> </el-table-column>
       <el-table-column label="Name" prop="name"> </el-table-column>
-      <!-- <el-table-column align="right">
-        <template slot="header" :slot-scope="scope">
-          <el-input v-model="search" size="mini" placeholder="Type to search" />
-        </template>
-        <template slot-scope="scope">
-          <el-popover
-            placement="bottom"
-            title="Edit Employee"
-            width="200"
-            trigger="click"
-          >
-            <el-input
-              placeholder="John Doe"
-              v-model="scope.row.name"
-              @blur="updateEmployee(scope.row.id, scope.row.name, date)"
-            ></el-input>
-            <el-button size="mini" slot="reference">Edit</el-button>
-          </el-popover>
-          <el-button
-            size="mini"
-            type="danger"
-            @click="deleteEmployee(scope.row.id)"
-            >Delete</el-button
-          >
-        </template>
-      </el-table-column> -->
+      <el-table-column align="right">
+       <template #default="scope">
+         <el-popover
+           placement="bottom"
+           title="Edit Employee"
+           width="200"
+           trigger="click"
+         >
+
+           <template #reference>
+             <el-button round  type="success"
+               >Edit Employee</el-button
+             >
+           </template>
+
+           <el-input
+             placeholder="John Doe"
+             v-model="edit_name"
+           ></el-input>
+
+           <el-button 
+             class="margin-button" 
+             round  
+             type="warning"
+             @click="editEmployee(scope.row.id, edit_name)"
+             >Edit Employee</el-button
+           >
+           
+           <el-button 
+             class="margin-button" 
+             round  
+             type="danger"
+             @click="deleteEmployee()"
+             >Delete Employee</el-button
+           >
+         </el-popover>
+       </template>
+     </el-table-column>
     </el-table>
   </div>
 </template>
 
 <script>
+/* eslint-disable */
 import db from "./firebaseInit.js";
-import { collection, addDoc, query, onSnapshot } from "firebase/firestore";
+import { collection, addDoc, query, onSnapshot, doc, updateDoc } from "firebase/firestore";
 
 const employees = collection(db, 'employees');
 
@@ -76,7 +89,8 @@ export default {
   name: 'App',
   data() {
     return {
-      name: '',
+      add_name: '',
+      edit_name: '',
       employeesData: [],
       unsubscribe: ''
     }
@@ -108,6 +122,16 @@ export default {
       .catch((error) => {
         console.error("Error writing document: %s", error);
       });
+    },
+
+    editEmployee(id, name) {
+      const docRef = doc(db, 'employees', id);
+
+      updateDoc(docRef, {name: name});
+    },
+
+    deleteEmployee(id) {
+
     }
   }
 
