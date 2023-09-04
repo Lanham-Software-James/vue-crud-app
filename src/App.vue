@@ -16,7 +16,10 @@
         v-model="add_name"
       ></el-input>
 
-      <el-button round  type="success" @click="createEmployee(add_name)"
+      <el-button 
+        id="add-button"
+        round  
+        type="success" @click="createEmployee(add_name)"
         >Add Employee</el-button
       >
     </el-popover>
@@ -31,7 +34,7 @@
           }
         })
       "
-      style="width: 100%;"
+      style="width: 75%;"
     >
       <el-table-column label="Date" prop="date"> </el-table-column>
       <el-table-column label="Name" prop="name"> </el-table-column>
@@ -59,7 +62,7 @@
            ></el-input>
 
            <el-button 
-             class="margin-button" 
+             id="edit-button" 
              round  
              type="warning"
              @click="editEmployee(scope.row.id, edit_name)"
@@ -67,7 +70,7 @@
            >
            
            <el-button 
-             class="margin-button" 
+             id="delete-button" 
              round  
              type="danger"
              @click="deleteEmployee(scope.row.id)"
@@ -148,11 +151,11 @@ export default {
       this.edit_name = name;
     }
   }
-
-
 }
 </script>
 
 <style>
-
+#delete-button, #add-button, #edit-button {
+  margin-top: 10px;
+}
 </style>
