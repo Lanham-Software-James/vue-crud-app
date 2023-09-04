@@ -78,9 +78,10 @@ export default {
     this.unsubscribe = onSnapshot(q, (querySnapshot) => {
       this.employeesData = []
       querySnapshot.forEach((doc) => {
+        const id = doc.id;
         const date = new Date(doc.data().date.seconds * 1000).toLocaleDateString();
         const name = doc.data().name;
-        const value = {date, name};
+        const value = {id, date, name};
 
         this.employeesData.push(value);
       });
