@@ -12,6 +12,14 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: npm ci --legacy-peer-deps && npm run build
+        env:
+          VUE_APP_VERSION: 0.0
+          VUE_APP_FIREBASE_apiKey: ${{ secrets.VUE_APP_FIREBASE_apiKey }}
+          VUE_APP_FIREBASE_authDomain: ${{ secrets.VUE_APP_FIREBASE_authDomain }}
+          VUE_APP_FIREBASE_projectId: ${{ secrets.VUE_APP_FIREBASE_projectId }}
+          VUE_APP_FIREBASE_storageBucket: ${{ secrets.VUE_APP_FIREBASE_storageBucket }}
+          VUE_APP_FIREBASE_messagingSenderId: ${{ secrets.VUE_APP_FIREBASE_messagingSenderId }}
+          VUE_APP_FIREBASE_appId: ${{ secrets.VUE_APP_FIREBASE_appId }}
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
