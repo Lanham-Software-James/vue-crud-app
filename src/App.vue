@@ -12,11 +12,14 @@
         >Add New Employee</el-button
       >
     </template>
-    <el-input
+      <el-input
         placeholder="John Doe"
         v-model="name"
-        @blur="createEmployee(name, date)"
       ></el-input>
+
+      <el-button round  type="success" @click="createEmployee(name)"
+        >Add Employee</el-button
+      >
     </el-popover>
 
     <el-table
