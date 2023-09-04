@@ -46,7 +46,10 @@
          >
 
            <template #reference>
-             <el-button round  type="success"
+             <el-button 
+              round  
+              type="success"
+              @click="setEditName(scope.row.name)"
                >Edit Employee</el-button
              >
            </template>
@@ -132,6 +135,10 @@ export default {
 
     deleteEmployee(id) {
 
+    },
+
+    setEditName(name) {
+      this.edit_name = name;
     }
   }
 
