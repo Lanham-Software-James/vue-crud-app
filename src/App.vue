@@ -1,5 +1,4 @@
 <template>
-   <!-- eslint-disable -->
    <div>
     <el-popover
       placement="bottom"
@@ -82,7 +81,6 @@
 </template>
 
 <script>
-/* eslint-disable */
 import db from "./firebaseInit.js";
 import { collection, addDoc, query, onSnapshot, doc, updateDoc, deleteDoc } from "firebase/firestore";
 
