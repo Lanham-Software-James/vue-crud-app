@@ -71,7 +71,7 @@
              class="margin-button" 
              round  
              type="danger"
-             @click="deleteEmployee()"
+             @click="deleteEmployee(scope.row.id)"
              >Delete Employee</el-button
            >
          </el-popover>
@@ -84,7 +84,7 @@
 <script>
 /* eslint-disable */
 import db from "./firebaseInit.js";
-import { collection, addDoc, query, onSnapshot, doc, updateDoc } from "firebase/firestore";
+import { collection, addDoc, query, onSnapshot, doc, updateDoc, deleteDoc } from "firebase/firestore";
 
 const employees = collection(db, 'employees');
 
@@ -134,7 +134,9 @@ export default {
     },
 
     deleteEmployee(id) {
+      const docRef = doc(db, 'employees', id);
 
+      deleteDoc(docRef);
     },
 
     setEditName(name) {
