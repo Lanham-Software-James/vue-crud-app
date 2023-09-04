@@ -21,10 +21,13 @@
 
     <el-table
       :data="
-        employeesData.filter(
-          (data) =>
-            data.name.toLowerCase()
-        )
+        employeesData.sort((a, b) => {
+          if(a.date == b.date){
+            return a.name.toLowerCase() <  b.name.toLowerCase() ? -1 : 1
+          } else {
+            return new Date(a.date) - new Date(b.date)
+          }
+        })
       "
       style="width: 100%;"
     >
